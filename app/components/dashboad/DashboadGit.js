@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Avatar, Row, Col, Table, Tag, Typography, Spin, message } from 'antd';
-import { 
+import {
   GithubOutlined,
   UserOutlined,
   UserAddOutlined,
   FolderOpenOutlined,
- } from '@ant-design/icons';
+} from '@ant-design/icons';
 
 const { Title, Paragraph } = Typography;
 
@@ -95,7 +95,10 @@ const DashboardGit = () => {
         <GithubOutlined /> GitHub Dashboard
       </Title>
       {loadingUser ? (
-        <Spin tip="loading data of user..." />
+        <Spin spinning={loadingUser} tip="loading data of user...">
+          <div style={{ height: 80 }} />
+        </Spin>
+
       ) : (
         userData && (
           <Card style={{ marginBottom: '24px' }}>
@@ -123,10 +126,10 @@ const DashboardGit = () => {
           </Card>
         )
       )}
-
-      <Title level={3}>List Repository</Title>
       {loadingRepos ? (
-        <Spin tip="Loading of Repository..." />
+        <Spin spinning={true} tip="Loading of Repository...">
+          <div style={{ minHeight: 200 }} /> {/* ให้ Spin มีพื้นที่แสดง */}
+        </Spin>
       ) : (
         <Table
           columns={columns}
@@ -135,6 +138,7 @@ const DashboardGit = () => {
           pagination={{ pageSize: 5 }}
         />
       )}
+
     </div>
   );
 };

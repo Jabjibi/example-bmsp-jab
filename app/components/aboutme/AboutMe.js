@@ -5,13 +5,13 @@ export default function AboutMe() {
   const [name, setName] = useState("DoBerman");
   const [data, setData] = useState(null);
 
-  const changeName = () => {
-    setName("JabDoberman");
-  };
-
   useEffect(() => {
     fetchData();
   }, []);
+
+  const changeName = () => {
+    setName("JabDoberman");
+  };
 
   const fetchData = async () => {
     try {
@@ -25,53 +25,60 @@ export default function AboutMe() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden p-6 mt-10">
-      <div className="w-full flex flex-col justify-center gap-4 bg-blue-950 rounded-xl shadow p-4">
-        <div className="flex flex-col md:flex-row gap-4">
+    <div className="w-full max-w-xl mx-auto mt-12 px-4">
+      <div className="bg-white shadow-xl rounded-2xl overflow-hidden p-6">
+        {/* Profile Section */}
+        <div className="flex flex-col md:flex-row items-center gap-6 bg-blue-950 p-5 rounded-xl">
           <img
             src="https://media1.tenor.com/m/qVFwBCEg80UAAAAC/black-clover-yami-sukehiro.gif"
             alt="Profile"
-            className="w-28 h-28 rounded-xl object-cover shadow-md mx-auto md:mx-0"
+            className="w-28 h-28 object-cover rounded-xl shadow-lg"
           />
-          <div className="flex flex-col text-white justify-center overflow-hidden text-center md:text-left">
-            <span className="font-bold italic text-lg">
+          <div className="text-white text-center md:text-left space-y-2">
+            <h1 className="text-xl font-semibold italic">
               {data?.name || "Loading..."}
-            </span>
-            <p className="line-clamp-3 text-sm md:text-base">
+            </h1>
+            <p className="text-sm md:text-base line-clamp-3">
               {data?.job || "Position..."}
             </p>
-            <p className="mt-2 text-sm">
-              My name is:{" "}
+            <div>
+              <label className="block text-sm">My name is:</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 px-2 py-1 rounded border border-gray-300 text-white w-full md:w-auto"
+                placeholder="Enter your name"
+                className="mt-1 px-3 py-1 rounded border border-gray-300 bg-white text-black w-full md:w-64"
               />
-            </p>
+            </div>
           </div>
         </div>
-        <button
-          onClick={changeName}
-          className="bg-blue-700 hover:bg-blue-400 text-blue-100 font-bold 
-          py-2 px-4 rounded-full shadow-md hover:text-white 
-          transform transition-all duration-300 hover:scale-105"
-        >
-          ClickMe!
-        </button>
-      </div>
 
-      <div className="mt-6 text-sm md:text-base">
-        <p className="mb-1">
-          <span className="font-semibold">University:</span>{" "}
-          {data?.university || "-"}
-        </p>
-        <p className="mb-1">
-          <span className="font-semibold">Email:</span> {data?.email || "-"}
-        </p>
-        <p>
-          <span className="font-semibold">Tel:</span> {data?.tel || "-"}
-        </p>
+        {/* Info Section */}
+        <div className="mt-6 space-y-2 text-sm md:text-base text-gray-700">
+          <p>
+            <span className="font-semibold">University:</span>{" "}
+            {data?.university || "-"}
+          </p>
+          <p>
+            <span className="font-semibold">Email:</span>{" "}
+            {data?.email || "-"}
+          </p>
+          <p>
+            <span className="font-semibold">Tel:</span>{" "}
+            {data?.tel || "-"}
+          </p>
+        </div>
+
+        {/* Button */}
+        <div className="mt-6 text-center">
+          <button
+            onClick={changeName}
+            className="bg-blue-700 hover:bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105"
+          >
+            Click Me!
+          </button>
+        </div>
       </div>
     </div>
   );
